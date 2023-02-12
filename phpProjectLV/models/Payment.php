@@ -81,7 +81,7 @@ public function cardValidation()
  }
 
 public function paymentValidation(){
-    if($this->cardValidation($this->cardNumber) && $this->dateExpiration($this->date) && $this->cvvValidation($this->cvv))
+    if($this->cardValidation() && $this->dateExpiration() && $this->cvvValidation())
 {
     $_SESSION['purchased']="true";
     
@@ -115,16 +115,3 @@ else{
 
 
 
-<!-- 
-
-
-class payment extends login 
-{
-    public $date;
-    public $credit;
-
-    public function payment_valid(){
-
-        $this->credit =
-    }
-} --> 
