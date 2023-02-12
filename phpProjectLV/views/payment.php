@@ -1,36 +1,36 @@
 <?php
  $validerror ="";
+if($_POST){
+  $email = $_POST['email'];
+  $password =$_POST['password'];
 
-$date=isset($_POST['date_expiration'])?$_POST['date_expiration']:"";
-$cvv=isset($_Post['cvv'])?$_Post['cvv']:"";
-$cardNumber= isset($_POST['credit'])?$_POST['credit']:"";
 
- $error_valid=new Payment;
- $error_valid->__constructor($cardNumber,$date,$cvv);
- $validerror=$error_valid->paymentValidation($cardNumber,$cvv,$date);
+  $login = new Login;
+  
+  $login->__constructor($email,$password);
+  
+  // -------get user data from data base -----------
+  
+  $data = new SqlHandler;
+  $data->setTable("users");
+  $arrayUserData=$data->selectRecord($email);
+  // ---------check user credentials ---------------------
+  $login->checkUserData($arrayUserData['email'],$arrayUserData['password']);
+
+  $date=isset($_POST['date_expiration'])?$_POST['date_expiration']:"";
+  $cvv=isset($_Post['cvv'])?$_Post['cvv']:"";
+  $cardNumber= isset($_POST['credit'])?$_POST['credit']:"";
+  
+   $payment=new Payment;
+   $payment->__constructor($cardNumber,$date,$cvv);
+   $validerror=$payment->paymentValidation();
+
+}
 // unset($_SESSION['purchased']);
 
 
 
-if($_POST){
-    $email = $_POST['email'];
-    $password =$_POST['password'];
 
-  
-    $login = new Login;
-    
-    $login->__constructor($email,$password);
-    
-    // -------get user data from data base -----------
-    
-    $data = new SqlHandler;
-    $data->setTable("users");
-    $arrayUserData=$data->selectRecord($email);
-    // ---------check user credentials ---------------------
-    $login->checkUserData($arrayUserData['email'],$arrayUserData['password']);
- 
-    
-  }
   
  ?>
 <html lang="en">
