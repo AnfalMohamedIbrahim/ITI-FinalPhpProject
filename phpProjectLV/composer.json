@@ -1,0 +1,14 @@
+{
+    "autoload":{
+        "classmap": ["./models"],
+        "files":["config.php","session.php"]
+    },
+    
+        "require": {
+            "php": "^7.4 || ^8.0",
+            "chillerlan/php-qrcode": "^4.3",
+        "bacon/bacon-qr-code": "^2.0"
+        }
+
+        
+    }
