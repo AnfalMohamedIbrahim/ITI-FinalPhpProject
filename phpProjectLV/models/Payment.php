@@ -85,7 +85,7 @@ public function paymentValidation(){
 {
     $_SESSION['purchased']="true";
     
-    header("location:./index.php?view=download");
+return    header("location:./index.php?view=download");
 }
 else{
     $_SESSION['purchased']="false";
